@@ -55,14 +55,15 @@ def addStory(new_title, st_author, st_content):
 
 #make an update to a story
 def addUpdate(new_storyID, new_content, new_contributor):
-    c.execute('INSERT INTO updates VALUES (?,?,?)'[new_storyID, new_content, new_contributor])
-    old_content = c.execute('SELECT content FROM stories WHERE storyID= ' + str(new_storyID) + ';')
+    c.execute('INSERT INTO updates VALUES (?,?,?)',[new_storyID, new_content, new_contributor])
+    c.execute('SELECT content FROM stories WHERE storyID= ' + str(new_storyID) + ';')
+    old_content = c.fetchone()
     print 'OLD CONTENT...'
     print old_content
-    new_content = old_content + str(old_content)
+    final_content = old_content[0] +' ' + new_content
     print 'NEW CONTENT...'
-    print new_content
-    c.execute('UPDATE stories SET content =' + new_content + ' WHERE storyID =' + str(new_storyID) + ';')
+    print final_content
+    c.execute('UPDATE stories SET content ="' + final_content + '" WHERE storyID =' + str(new_storyID) + ';')
 
 
 #TESTING
@@ -73,7 +74,7 @@ addUser('bob', 'iryg9137')
 addUser('sasha', 'jfhv173')
 
 #make story
-addStory('welcome', 0, 'well, hello there')
+addStory('welcome', 0, 'well hello there')
 addStory('bye', 3, 'we enjoyed the time')
 
 #update story
