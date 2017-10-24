@@ -58,12 +58,19 @@ def addUpdate(new_storyID, new_content, new_contributor):
     c.execute('INSERT INTO updates VALUES (?,?,?)',[new_storyID, new_content, new_contributor])
     c.execute('SELECT content FROM stories WHERE storyID= ' + str(new_storyID) + ';')
     old_content = c.fetchone()
-    print 'OLD CONTENT...'
-    print old_content
+    #print 'OLD CONTENT...'
+    #print old_content
     final_content = old_content[0] +' ' + new_content
-    print 'NEW CONTENT...'
-    print final_content
+    #print 'NEW CONTENT...'
+    #print final_content
     c.execute('UPDATE stories SET content ="' + final_content + '" WHERE storyID =' + str(new_storyID) + ';')
+
+def getLastEdit(st_ID):
+    all_edits = c.execute('SELECT contribution FROM updates WHERE storyID= ' + str(st_ID) + ';')
+    retVal = ''
+    for x in all_edits:
+        retVal = x[0]
+    print retVal
 
 
 #TESTING
@@ -79,7 +86,13 @@ addStory('bye', 3, 'we enjoyed the time')
 
 #update story
 addUpdate(0, 'how are you doing', 1)
-addUpdate(1, 'we will see you later', 2)
+addUpdate(1, 'we will see you later', 3)
+addUpdate(0, 'doing fine', 2)
+addUpdate(1, 'kk will do', 0)
+
+#get the last edit
+getLastEdit(0)
+#getLastEdit(1)
 
 
 db.commit()
