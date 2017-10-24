@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+
+	<title> New </title> <!-- use a conditional to change it-->
+</head>
+<style type="text/css">
+	body {
+		background-color: #B5E2FA;
+
+	} 
+	ul {
+	    list-style-type: none;
+	    margin:  0;
+	    padding: 0;
+	    overflow: hidden;
+	    background-color: #F0EAD6;
+	}
+
+	li {
+	    float: left;
+	    border-right:0.5px solid #0FA3B1;
+	}
+
+	li:last-child {
+	    border-right: none;
+	}
+
+	li a {
+	    display: block;
+	    color: #070600;
+	    text-align: center;
+	    padding: 20px 20px;
+	    text-decoration: none;
+	}
+
+	li a:hover:not(.active) {
+	    background-color: #FFBC42;
+	}
+	.active {
+    background-color: #FFD151;
+	}
+
+</style>
+<body>
+
+	<!-- Put the conditional to print the story -->
+	<ul>
+  <li><a class="active" href="home.html">Home</a></li>
+  <li><a href="add.html">Add New Story</a></li>
+  <li style="float:right"><a href = "login.html">Log Out</a></li>
+	</ul>
+	<br><br>
+	<h2>Stories</h2>
+	<form>
+		Title <br>
+		<input type="text" name="title"><br><br>
+		<textarea rows="4" cols="50" name="newStoryText"></textarea>
+		<br>
+		<input type="submit" value="Submit">
+	</form>
+
+</body>
+</html>

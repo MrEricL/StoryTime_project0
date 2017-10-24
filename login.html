@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<style>
+* {
+  box-sizing: border-box;
+}
+html, body, section, div {
+  height: 100%;
+}
+
+body { 
+  color: #fff;
+  font-family: sans-serif;
+  font-size: 1.25rem;
+  line-height: 150%;
+  text-align: center;
+  text-shadow: 0 2px 2px #F4442E;
+  background-color: #F2F3AE;
+}
+
+section {
+  width: 100%;
+}
+
+article,form {
+  position: relative;
+  top: 50%;
+  left: 50%;
+  padding: 1rem;
+  text-align: center;
+  transform: translate(-50%, -50%);
+}
+
+h1 {
+  font-size: 1.75rem;
+  margin: 0 0 0.75rem 0;
+}
+
+/* Pattern styles */
+.left-half {
+  background-color: #EDD382;
+  float: left;
+  width: 50%;
+}
+.right-half {
+  background-color: #FC9E4F;
+  float: right;
+  width: 50%;
+}
+</style>
+<body>
+
+
+
+<section class="container">
+  <div class="left-half">
+
+    <article>
+      <h1>Login</h1><br><br><br><br><br><br>
+      		<form> 
+            
+			Username: <br>
+			    <input type="text" placeholder="username" name="user" required>
+			    <br><br>
+			Password: <br>
+				<input type="password" placeholder="password" name="pass" required>
+			<br><br>
+			      <button type="submit" class="submit">Sign Up</button>		
+		</form>
+	</article>
+
+  </div>
+  <div class="right-half">
+    <article>
+      <h1>Register</h1><br><br><br><br><br><br>
+      		<form> 
+			Username: <br>
+			    <input type="text" placeholder="username" name="user" required>
+			    <br><br>
+			Password: <br>
+				<input type="password" placeholder="password" name="pass" required>
+			<br><br>
+			      <button type="submit" class="submit">Sign Up</button>		
+		</form>
+	</article>
+  </div>
+</section>
+</body>
+</html>
