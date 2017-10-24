@@ -70,7 +70,17 @@ def getLastEdit(st_ID):
     retVal = ''
     for x in all_edits:
         retVal = x[0]
-    print retVal
+    return retVal
+
+def getFullStory(st_ID):
+    story = c.execute('SELECT content FROM stories WHERE storyID= ' + str(st_ID) + ';')
+    for x in story:
+        return x[0]
+
+def getTitle(st_ID):
+    retTitle = c.execute('SELECT title FROM stories WHERE storyID= ' + str(st_ID) + ';')
+    for x in retTitle:
+        return x[0]
 
 
 #TESTING
@@ -92,7 +102,15 @@ addUpdate(1, 'kk will do', 0)
 
 #get the last edit
 getLastEdit(0)
-#getLastEdit(1)
+getLastEdit(1)
+
+#get full story
+print getFullStory(0)
+print getFullStory(1)
+
+#get title
+print getTitle(0)
+print getTitle(1)
 
 
 db.commit()
