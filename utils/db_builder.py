@@ -2,11 +2,6 @@ import sqlite3   #enable control of an sqlite database
 import csv       #facilitates CSV I/O
 
 
-f="usersandstories.db"
-
-db = sqlite3.connect(f) #open if f exists, otherwise create
-c = db.cursor()         #facilitates db ops
-
 #==========================================================
 '''
 TABLE CREATION
@@ -14,17 +9,21 @@ Database usersandstories.db
 Tables: users, stories, updates
 '''
 
-#Create the users table
-user_table = 'CREATE TABLE users (username TEXT, password BLOB, userID INTEGER);'
-c.execute(user_table)
-
-#Create the stories table
-stories_table = 'CREATE TABLE stories (storyID INTEGER, title TEXT, author INTEGER, content TEXT);'
-c.execute(stories_table)
-
-#Create the updates table
-update_table = 'CREATE TABLE updates (storyID INTEGER, contribution TEXT, contributor INTEGER);'
-c.execute(update_table)
+def tableCreation():
+    f="usersandstories.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()         #facilitates db ops
+    #Create the users table
+    user_table = 'CREATE TABLE users (username TEXT, password BLOB, userID INTEGER);'
+    c.execute(user_table)
+    #Create the stories table
+    stories_table = 'CREATE TABLE stories (storyID INTEGER, title TEXT, author INTEGER, content TEXT);'
+    c.execute(stories_table)
+    #Create the updates table
+    update_table = 'CREATE TABLE updates (storyID INTEGER, contribution TEXT, contributor INTEGER);'
+    c.execute(update_table)
+    db.commit()
+    db.close()
 
 #==========================================================
 
@@ -38,23 +37,36 @@ storyID_counter = 0; #helps to assign storyID
 
 #add a user
 def addUser(new_username, new_password):
+    f="usersandstories.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()         #facilitates db ops
     global userID_counter
     new_userID = userID_counter
     userID_counter += 1
     c.execute('INSERT INTO users VALUES (?,?,?)',[new_username, new_password, new_userID])
+    db.commit()
+    db.close()
 
 
 #add a new story
 def addStory(new_title, st_author, st_content):
+    f="usersandstories.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()         #facilitates db ops
     global storyID_counter
     new_storyID = storyID_counter
     storyID_counter += 1
     c.execute('INSERT INTO stories VALUES (?,?,?,?)',[new_storyID, new_title, st_author, st_content])
     c.execute('INSERT INTO updates VALUES (?,?,?)',[new_storyID, st_content, st_author])
+    db.commit()
+    db.close()
 
 
 #make an update to a story
 def addUpdate(new_storyID, new_content, new_contributor):
+    f="usersandstories.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()         #facilitates db ops
     c.execute('INSERT INTO updates VALUES (?,?,?)',[new_storyID, new_content, new_contributor])
     c.execute('SELECT content FROM stories WHERE storyID= ' + str(new_storyID) + ';')
     old_content = c.fetchone()
@@ -64,29 +76,51 @@ def addUpdate(new_storyID, new_content, new_contributor):
     #print 'NEW CONTENT...'
     #print final_content
     c.execute('UPDATE stories SET content ="' + final_content + '" WHERE storyID =' + str(new_storyID) + ';')
+    db.commit()
+    db.close()
 
 def getLastEdit(st_ID):
+    f="usersandstories.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()         #facilitates db ops
     all_edits = c.execute('SELECT contribution FROM updates WHERE storyID= ' + str(st_ID) + ';')
     retVal = ''
     for x in all_edits:
         retVal = x[0]
+    db.close()
     return retVal
 
 def getFullStory(st_ID):
+    f="usersandstories.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()         #facilitates db ops
     story = c.execute('SELECT content FROM stories WHERE storyID= ' + str(st_ID) + ';')
+    retVal = ''
     for x in story:
-        return x[0]
+        retVal = x[0]
+    db.close()
+    return retVal
 
 def getTitle(st_ID):
+    f="usersandstories.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()         #facilitates db ops
     retTitle = c.execute('SELECT title FROM stories WHERE storyID= ' + str(st_ID) + ';')
+    retVal = ''
     for x in retTitle:
-        return x[0]
+        retVal =  x[0]
+    db.close()
+    return retVal
 
 #==========================================================
 #ACCESSORS
 def getInfo(username):
+    f="usersandstories.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()         #facilitates db ops
     command = "SELECT username, password FROM users"
     info = c.execute(command)
+    db.close()
     for entry in info:
         if str(entry[0]) == username:
             return str(entry[1])
@@ -94,6 +128,8 @@ def getInfo(username):
 
     
 #TESTING
+tableCreation()
+
 #add users
 addUser('manahal', 'mt123')
 addUser('joe', 'fgh349')
@@ -121,7 +157,3 @@ print getFullStory(1)
 #get title
 print getTitle(0)
 print getTitle(1)
-
-
-db.commit()
-db.close()
