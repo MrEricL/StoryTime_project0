@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(32)  #for the cookies
 
-logged = False
+logged = True
 #need a method to update this
 
 BAD_USER = -1
@@ -73,18 +73,20 @@ def new():
 if __name__ == '__main__':
     app.run(debug=True)
 
+#log out user
+@app.route('/logout')
+def logout():
+
+    #pop out user from session
+    #flash logout message
+    return redirect("login")
+
+
+
 ''' JUNK PILE
 #create new account 
 @app.route('/register')
 def register():
     #if there isn't an existing user w/ same username, add to users table 
     #otherwise redirect to root with flashed message 
-
-
-#log out user
-@app.route('/logout')
-def logout():
-    #pop out user from session
-    #flash logout message
-    #redirect to root
-    '''
+'''
