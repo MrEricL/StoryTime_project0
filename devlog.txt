@@ -38,7 +38,7 @@ LESSONS LEARNED
 
 2017-10-21
 --------------------------------------------------------------
-AN-
+AN- skeleton for app.py
 AM-
 EL- Worked on the login/register and dashboard HTML + colors!
 MT-
@@ -48,15 +48,15 @@ MT-
 2017-10-23
 --------------------------------------------------------------
 AN-
-AM-
+AM- 
 EL- Finished login/register and dashboard HTML + navigation bar
 MT-
 ==============================================================
 
 2017-10-24
 --------------------------------------------------------------
-AN-
-AM-
+AN- worked on login (authentication) 
+AM- 
 EL- Finished new and view/add HTML
 MT-
 ==============================================================
