@@ -1,4 +1,4 @@
-from db_builder import getInfo
+from db_builder import getInfo, addUser
 
 BAD_USER = -1
 BAD_PASS = -2
@@ -17,3 +17,6 @@ print authenticate('manahal', 'mt123')
 print authenticate('joe', 'mt123')
 print authenticate('jack', 'mt123')
 
+
+def register(user, passw):
+     addUser(user,passw)
