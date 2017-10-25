@@ -120,11 +120,12 @@ def getInfo(username):
     c = db.cursor()         #facilitates db ops
     command = "SELECT username, password FROM users"
     info = c.execute(command)
-    db.close()
+    retVal = None
     for entry in info:
         if str(entry[0]) == username:
-            return str(entry[1])
-    return None
+            retVal = str(entry[1])
+    db.close()
+    return retVal
 
 #==========================================================
 #HELPERS
@@ -141,40 +142,40 @@ def hasContributed(thisUser,thisStory):
         #print row[0]
     db.close()
 
+if __name__ == '__main__':     
+    #TESTING
+    tableCreation()
     
-#TESTING
-tableCreation()
-
-#add users
-addUser('manahal', 'mt123')
-addUser('joe', 'fgh349')
-addUser('bob', 'iryg9137')
-addUser('sasha', 'jfhv173')
-
-#make story
-addStory('welcome', 0, 'well hello there')
-addStory('bye', 3, 'we enjoyed the time')
-
-#update story
-addUpdate(0, 'how are you doing', 1)
-addUpdate(1, 'we will see you later', 3)
-addUpdate(0, 'doing fine', 2)
-addUpdate(1, 'kk will do', 0)
-
-#get the last edit
-getLastEdit(0)
-getLastEdit(1)
-
-#get full story
-print getFullStory(0)
-print getFullStory(1)
-
-#get title
-print getTitle(0)
-print getTitle(1)
-
-#check if somebody's edited the story
-print "Has user 1 edited story 0 (should be True): " + str( hasContributed(1,0) )
-print "Has user 6 edited story 0 (should be False): " + str( hasContributed(6,0) )
-print "Has user 3 edited story 0 (should be False): " + str( hasContributed(3,0) )
-print "Has user 2 edited story 0 (should be True): " + str( hasContributed(2,0) )
+    #add users
+    addUser('manahal', 'mt123')
+    addUser('joe', 'fgh349')
+    addUser('bob', 'iryg9137')
+    addUser('sasha', 'jfhv173')
+    
+    #make story
+    addStory('welcome', 0, 'well hello there')
+    addStory('bye', 3, 'we enjoyed the time')
+    
+    #update story
+    addUpdate(0, 'how are you doing', 1)
+    addUpdate(1, 'we will see you later', 3)
+    addUpdate(0, 'doing fine', 2)
+    addUpdate(1, 'kk will do', 0)
+    
+    #get the last edit
+    getLastEdit(0)
+    getLastEdit(1)
+    
+    #get full story
+    print getFullStory(0)
+    print getFullStory(1)
+    
+    #get title
+    print getTitle(0)
+    print getTitle(1)
+    
+    #check if somebody's edited the story
+    print "Has user 1 edited story 0 (should be True): " + str( hasContributed(1,0) )
+    print "Has user 6 edited story 0 (should be False): " + str( hasContributed(6,0) )
+    print "Has user 3 edited story 0 (should be False): " + str( hasContributed(3,0) )
+    print "Has user 2 edited story 0 (should be True): " + str( hasContributed(2,0) )
