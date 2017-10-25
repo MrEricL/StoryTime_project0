@@ -1,31 +1,46 @@
 from flask import Flask, render_template, request, session, url_for, flash, redirect
+from utils.accounts import authenticate
 import os
 
 app = Flask(__name__)
 app.secret_key = os.urandom(32)  #for the cookies
 
-logged = True
+logged = False
 #need a method to update this
+
+BAD_USER = -1
+BAD_PASS = -2
+GOOD = 1
 
 @app.route('/')
 def root():
     #redirect to home if there is a session
-    #otherwise display login/register page 
-    return redirect(url_for("login"))
-
-#authenticate user credentials
-@app.route('/login')
-def login():
-    #if successful, redirect to home
-    #otherwise redirect back to root?
-
+    #otherwise display login/register page
     #if <logged in>: 
     #   return redirect(url_for("home"))
     if logged:
         return redirect("home")
     else:
         return render_template("login.html")
+    #return redirect(url_for("login"))
 
+#authenticate user credentials
+@app.route('/login', methods = ['POST'])
+def login():
+    user = request.form['user']
+    passw = request.form['pass']
+
+    result = authenticate(user, passw)
+
+    #if successful, redirect to home
+    #otherwise redirect back to root?
+    if result == GOOD:
+        return redirect( url_for('home') )
+    if result == BAD_USER:
+        pass
+    if result == BAD_PASS:
+        pass
+    return redirect( url_for('root') )
 
 #user dashboard 
 @app.route('/home')
@@ -54,6 +69,7 @@ def new():
         return render_template("new.html")
     else:    
         return redirect(url_for("login"))
+    
 if __name__ == '__main__':
     app.run(debug=True)
 
