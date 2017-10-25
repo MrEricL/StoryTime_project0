@@ -82,7 +82,17 @@ def getTitle(st_ID):
     for x in retTitle:
         return x[0]
 
+#==========================================================
+#ACCESSORS
+def getInfo(username):
+    command = "SELECT username, password FROM users"
+    info = c.execute(command)
+    for entry in info:
+        if str(entry[0]) == username:
+            return str(entry[1])
+    return None 
 
+    
 #TESTING
 #add users
 addUser('manahal', 'mt123')
