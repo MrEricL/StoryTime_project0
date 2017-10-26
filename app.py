@@ -24,17 +24,22 @@ def root():
         return render_template("login.html")
  
 #authenticate user credentials
-@app.route('/login', methods = ['POST'])
+@app.route('/login', methods = ['POST','GET'])
 def login():
     user = request.form['user']
+    #print user
     passw = request.form['pass']
+    #print passw
 
     result = authenticate(user, passw)
+    #print result
 
     #if successful, redirect to home
     #otherwise redirect back to root?
     if result == GOOD:
         session[user] = user
+        #for x in session:
+            #print session[x]
         return redirect( url_for('home') )
     if result == BAD_USER:
         flash('Incorrect username. Please try again.')
@@ -44,14 +49,18 @@ def login():
         return redirect( url_for('root') )
     return redirect( url_for('root') )
 
+#@app.route('/register', methods = ['POST'])
+#def register():
+    
+    
 #user dashboard 
 @app.route('/home')
 def home():
     #render template for dashboard
-    if logged:
-        return render_template("home.html")
-    else:    
-        return redirect(url_for("login"))
+    #if logged:
+    return render_template("home.html")
+    #else:    
+        #return redirect(url_for("login"))
         
 
 #allows user to view stories/add to stories (unless we want to separate the two)
