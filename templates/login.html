@@ -49,7 +49,10 @@ h1 {
 }
 </style>
 <body>
-
+  {% set messages = get_flashed_messages() %}
+  {% for message in messages %}
+  <center> {{message}} </center>
+  {% endfor %}
 
 
 <section class="container">

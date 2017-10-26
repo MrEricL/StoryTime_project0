@@ -16,8 +16,6 @@ GOOD = 1
 def root():
     #redirect to home if there is a session
     #otherwise display login/register page
-    #if <logged in>: 
-    #   return redirect(url_for("home"))
     if logged:
         return redirect("home")
     else:
@@ -35,7 +33,7 @@ def login():
     #print result
 
     #if successful, redirect to home
-    #otherwise redirect back to root?
+    #otherwise redirect back to root with flashed message 
     if result == GOOD:
         session[user] = user
         #for x in session:
