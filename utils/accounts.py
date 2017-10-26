@@ -15,7 +15,7 @@ if __name__ == '__main__':
      print authenticate('manahal', 'mt123')
      print authenticate('joe', 'mt123')
      print authenticate('jack', 'mt123')
-
+     
 
 def register(user, passw):
      addUser(user,passw)
