@@ -96,12 +96,11 @@ if __name__ == '__main__':
     app.run(debug=True)
 
 #log out user
-@app.route('/logout')
+@app.route('/logout', methods = ['POST','GET'])
 def logout():
-
-    #pop out user from session
-    #flash logout message
-    return redirect("login")
+    session.pop('user')
+    flash('You have been logged out successfully')
+    return redirect(url_for('login'))
 
 
 
