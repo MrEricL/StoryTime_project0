@@ -16,7 +16,7 @@ GOOD = 1
 def root():
     #redirect to home if there is a session
     #otherwise display login/register page
-    if logged:
+    if session.has_key('user'):
         return redirect("home")
     else:
         return render_template("login.html")
@@ -35,7 +35,7 @@ def login():
     #if successful, redirect to home
     #otherwise redirect back to root with flashed message 
     if result == GOOD:
-        session[user] = user
+        session['user'] = user
         #for x in session:
             #print session[x]
         return redirect( url_for('home') )
