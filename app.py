@@ -5,7 +5,7 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(32)  #for the cookies
 
-logged = True
+logged = False
 #need a method to update this
 
 BAD_USER = -1
@@ -22,8 +22,7 @@ def root():
         return redirect("home")
     else:
         return render_template("login.html")
-    #return redirect(url_for("login"))
-
+ 
 #authenticate user credentials
 @app.route('/login', methods = ['POST'])
 def login():
@@ -35,11 +34,14 @@ def login():
     #if successful, redirect to home
     #otherwise redirect back to root?
     if result == GOOD:
+        session[user] = user
         return redirect( url_for('home') )
     if result == BAD_USER:
-        pass
+        flash('Incorrect username. Please try again.')
+        return redirect( url_for('root') )
     if result == BAD_PASS:
-        pass
+        flash('Incorrect password. Please try again.')
+        return redirect( url_for('root') )
     return redirect( url_for('root') )
 
 #user dashboard 
