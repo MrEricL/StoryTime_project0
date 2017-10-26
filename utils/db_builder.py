@@ -112,6 +112,18 @@ def getTitle(st_ID):
     db.close()
     return retVal
 
+def checkUsername(userN):
+    f="usersandstories.db"
+    db = sqlite3.connect(f)
+    c = db.cursor()
+    users = c.execute('SELECT username FROM users;')
+    result = False
+    for x in users:
+        if (x[0] == userN):
+            result = True
+    db.close()
+    return result
+
 #==========================================================
 #ACCESSORS
 def getInfo(username):

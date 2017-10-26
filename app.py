@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, session, url_for, flash, redirect
 from utils.accounts import authenticate
+from utils.db_builder import checkUsername, addUser
 import os
 
 app = Flask(__name__)
@@ -47,8 +48,20 @@ def login():
         return redirect( url_for('root') )
     return redirect( url_for('root') )
 
-#@app.route('/register', methods = ['POST'])
-#def register():
+@app.route('/register', methods = ['POST', 'GET'])
+def register():
+    user = request.form['user']
+    print user
+    password = request.form['pass']
+    print password
+
+    if checkUsername(user):
+        flash('Username unavailable. Please try another username.')
+        return redirect(url_for('root'))
+    else:
+        addUser(user,password)
+        session['user'] = user
+        return redirect( url_for('home'))
     
     
 #user dashboard 
