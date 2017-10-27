@@ -1,4 +1,3 @@
-
 Team StoryTime
 Angel Ng
 Augie Murphy
@@ -41,7 +40,7 @@ LESSONS LEARNED
 AN- skeleton for app.py
 AM-
 EL- Worked on the login/register and dashboard HTML + colors!
-MT-
+MT- Worked on database creation, creating tables in db_builder.py
 ==============================================================
 
 
@@ -50,7 +49,8 @@ MT-
 AN-
 AM- 
 EL- Finished login/register and dashboard HTML + navigation bar
-MT-
+MT- Worked on test cases for the database, adding entries; creating
+    methods to accomplish this
 ==============================================================
 
 2017-10-24
@@ -58,7 +58,7 @@ MT-
 AN- worked on login (authentication) 
 AM- 
 EL- Finished new and view/add HTML
-MT-
+MT- Added accessor methods to gather data from tables and update data
 ==============================================================
 
 2017-10-25
@@ -66,13 +66,21 @@ MT-
 AN- 
 AM- 
 EL- Working on misc bugs
-MT-
+MT- Fixed bugs in working with database
 ==============================================================
 
 2017-10-26
 --------------------------------------------------------------
 AN + EL - Integrating the add/view python with the flask
-AM + MT - Fixing issues with the DB and working on the login/register
+AM + MT - Fixing issues with the DB and working on the login/register/logout
 ==============================================================
 
+2017-10-27
+--------------------------------------------------------------
+AN-
+AM-
+EL-
+MT- fixed logout, worked on creating database in other directory and 
+    bringing methods in accordance to it
+==============================================================
 
