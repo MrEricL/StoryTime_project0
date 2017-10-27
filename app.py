@@ -91,18 +91,17 @@ def new():
         return render_template("new.html")
     else:    
         return redirect(url_for("login"))
-    
-if __name__ == '__main__':
-    app.run(debug=True)
 
 #log out user
 @app.route('/logout', methods = ['POST','GET'])
 def logout():
     session.pop('user')
     flash('You have been logged out successfully')
-    return redirect(url_for('login'))
+    return redirect(url_for('root'))
 
-
+    
+if __name__ == '__main__':
+    app.run(debug=True)
 
 ''' JUNK PILE
 #create new account 
