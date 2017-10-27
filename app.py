@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, url_for, flash, redirect
 from utils.accounts import authenticate
-from utils.db_builder import checkUsername, addUser
+from utils.db_builder import checkUsername, addUser, addStory
 import os
 
 app = Flask(__name__)
@@ -12,6 +12,8 @@ logged = False
 BAD_USER = -1
 BAD_PASS = -2
 GOOD = 1
+
+user = ""
 
 @app.route('/')
 def root():
@@ -84,13 +86,21 @@ def view():
         return redirect(url_for("login"))
 
 #allows user to create new story 
-@app.route('/newstory')
+@app.route('/newstory', methods = ['POST','GET'])
 def new():
-    #render template
-    if logged:
-        return render_template("new.html")
-    else:    
-        return redirect(url_for("login"))
+        #if logged:
+    #return redirect(url_for('view'))
+    if request.method == 'POST':
+        title = request.form['title']
+        print title
+        content = request.form['newStoryText']
+        print content
+        addStory(title, user, content)
+        flash('You have successfully created a new story. Watch its progress below!')
+    return render_template("new.html")
+
+    #else:    
+        #return redirect(url_for("login"))
 
 #log out user
 @app.route('/logout', methods = ['POST','GET'])
