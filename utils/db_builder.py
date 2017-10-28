@@ -126,16 +126,31 @@ def checkUsername(userN):
 
 #==========================================================
 #ACCESSORS
-def getInfo(username):
+def getPass(username):
     f="usersandstories.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
     command = "SELECT username, password FROM users"
     info = c.execute(command)
+
     retVal = None
     for entry in info:
         if str(entry[0]) == username:
             retVal = str(entry[1])
+    db.close()
+    return retVal
+
+def getUserID(username):
+    f="usersandstories.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()         #facilitates db ops
+    command = "SELECT username, userID FROM users"
+    info = c.execute(command)
+
+    retVal = None
+    for user in info:
+        if str(user[0]) == username:
+            retVal = str(user[1])
     db.close()
     return retVal
 

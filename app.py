@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, url_for, flash, redirect
 from utils.accounts import authenticate
-from utils.db_builder import checkUsername, addUser, addStory
+from utils.db_builder import checkUsername, addUser, addStory, getUserID
 import os
 
 app = Flask(__name__)
@@ -95,7 +95,7 @@ def newstory():
 def new():
     title = request.form['title']
     print title
-    user = session['user']
+    user = getUserID(session['user'])
     content = request.form['newStoryText']
     print content
     addStory(title, user, content)

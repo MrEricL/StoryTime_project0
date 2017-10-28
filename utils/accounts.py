@@ -1,9 +1,9 @@
 import sqlite3
-from db_builder import getInfo, addUser
+from db_builder import getPass, addUser
 
 
 def authenticate(user, passw):
-     info = getInfo(user)
+     info = getPass(user)
      if info == None:
          return -1
      elif info != passw:
