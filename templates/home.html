@@ -42,6 +42,11 @@
 	<title>Dashboard</title>
 </head>
 <body>
+  {% set messages = get_flashed_messages() %}
+  {% for message in messages %}
+  <center> {{message}} </center>
+  {% endfor %}
+
 	<ul>
   <li><a class="active" href="home">Home</a></li>
    <li><a >Add/View</a></li>

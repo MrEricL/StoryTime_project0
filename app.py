@@ -87,20 +87,24 @@ def view():
 
 #allows user to create new story 
 @app.route('/newstory', methods = ['POST','GET'])
+def newstory():
+    if 'user' in session: 
+        return render_template("new.html")
+    else:    
+        return redirect(url_for("root"))
+
+@app.route('/new', methods = ['POST','GET'])
 def new():
-        #if logged:
-    #return redirect(url_for('view'))
-    if request.method == 'POST':
+    if 'user' in session: 
         title = request.form['title']
         print title
+        user = session['user']
         content = request.form['newStoryText']
         print content
         addStory(title, user, content)
         flash('You have successfully created a new story. Watch its progress below!')
-    return render_template("new.html")
-
-    #else:    
-        #return redirect(url_for("login"))
+        return redirect(url_for("home"))
+    
 
 #log out user
 @app.route('/logout', methods = ['POST','GET'])
