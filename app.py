@@ -6,9 +6,6 @@ import os
 app = Flask(__name__)
 app.secret_key = os.urandom(32)  #for the cookies
 
-logged = False
-#need a method to update this
-
 BAD_USER = -1
 BAD_PASS = -2
 GOOD = 1
@@ -71,19 +68,20 @@ def register():
 def home():
     #render template for dashboard
     #if logged:
-    return render_template("home.html")
-    #else:    
-        #return redirect(url_for("login"))
+    if 'user' in session: 
+        return render_template("home.html")
+    else:    
+        return redirect(url_for("root"))
         
 
 #allows user to view stories/add to stories (unless we want to separate the two)
 @app.route('/view')
 def view():
     #render template
-    if logged:
+    if 'user' in session:
         return render_template("addview.html")
     else:    
-        return redirect(url_for("login"))
+        return redirect(url_for("root"))
 
 #allows user to create new story 
 @app.route('/newstory', methods = ['POST','GET'])
@@ -95,15 +93,14 @@ def newstory():
 
 @app.route('/new', methods = ['POST','GET'])
 def new():
-    if 'user' in session: 
-        title = request.form['title']
-        print title
-        user = session['user']
-        content = request.form['newStoryText']
-        print content
-        addStory(title, user, content)
-        flash('You have successfully created a new story. Watch its progress below!')
-        return redirect(url_for("home"))
+    title = request.form['title']
+    print title
+    user = session['user']
+    content = request.form['newStoryText']
+    print content
+    addStory(title, user, content)
+    flash('You have successfully created a new story. Watch its progress below!')
+    return redirect(url_for("home"))
     
 
 #log out user
