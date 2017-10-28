@@ -54,8 +54,8 @@ def addStory(new_title, st_author, st_content):
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
     global storyID_counter
-    new_storyID = storyID_counter
     storyID_counter += 1
+    new_storyID = storyID_counter
     c.execute('INSERT INTO stories VALUES (?,?,?,?)',[new_storyID, new_title, st_author, st_content])
     c.execute('INSERT INTO updates VALUES (?,?,?)',[new_storyID, st_content, st_author])
     db.commit()
