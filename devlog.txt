@@ -55,7 +55,7 @@ MT- Worked on test cases for the database, adding entries; creating
 
 2017-10-24
 --------------------------------------------------------------
-AN- worked on login (authentication) 
+AN- worked on authenticating in accounts.py, getInfo in db_builder.py
 AM- 
 EL- Finished new and view/add HTML
 MT- Added accessor methods to gather data from tables and update data
@@ -63,7 +63,7 @@ MT- Added accessor methods to gather data from tables and update data
 
 2017-10-25
 --------------------------------------------------------------
-AN- 
+AN- worked on using authentication in login flask route
 AM- 
 EL- Working on misc bugs
 MT- Fixed bugs in working with database
@@ -77,7 +77,8 @@ AM + MT - Fixing issues with the DB and working on the login/register/logout
 
 2017-10-27
 --------------------------------------------------------------
-AN-
+AN- finished adding creating a new story, redirected user to login page if they
+    go to /newstory url without being logged in 
 AM-
 EL-
 MT- fixed logout, worked on creating database in other directory and 
