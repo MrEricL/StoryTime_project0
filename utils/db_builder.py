@@ -207,10 +207,12 @@ def hasContributed(thisUser,thisStory):
     con = c.execute('SELECT contributor FROM updates WHERE storyID = ' + str(thisStory) + ';')
     
     for row in con:
+        #print row
         if row[0]==thisUser:
             db.close()
             return True
         #print row[0]
+    return False
     db.close()
 
 
