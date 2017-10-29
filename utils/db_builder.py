@@ -181,12 +181,11 @@ def getName(ID):
     f="data/usersandstories.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
-    command = "SELECT username, userID FROM users"
-    info = c.execute(command)
+    info = c.execute('SELECT username FROM users WHERE userID =' + str(ID) + ';')
     retVal = None
     for user in info:
-        if str(user[1]) == ID:
-            retVal = str(user[0])
+        #print user
+        retVal = user[0]
     db.close()
     return retVal
 
@@ -247,6 +246,14 @@ if __name__ == '__main__':
     #get title
     print getTitle(0)
     print getTitle(1)
+
+    print getUserID('manahal')
+    print getUserID('sasha')
+
+    print getName(0)
+    print getName(1)
+    print getName(2)
+    print getName(3)
     
     #check if somebody's edited the story
     print "Has user 1 edited story 0 (should be True): " + str( hasContributed(1,0) )
