@@ -81,7 +81,7 @@ def home():
 def view():
     #render template
     if 'user' in session:
-        #thisStory = request.args['thisStory']
+        thisStory = request.form['thisStory']
         #hasCont = hasContributed(session['user'],thisStory)
         #if hasCont:
             #content = getFullStory(thisStory)

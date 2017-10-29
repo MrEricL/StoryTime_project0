@@ -75,21 +75,24 @@
 	    <th>Author</th>
 	    <th>Status</th>
 	  </tr>
+	  {% set thisStory = 0 %}
 	  {% for story in stories %}
-	    <tr>
-	      <td>{{story['storyID']}}</td>
-	      <td>{{story['title']}}</td>
-	      <td>{{story['author']}}</td>
-	      <td>
-		<form method="POST" action = "/view"  thisStory={{story['storyID']}}>
-		  {% if story['option'] %}
-		  <input type="submit" value="View">
-		  {% endif %}
-		  {% else %}
-		  <input type="submit" value="Add">
-		</form>
-	      </td>
-	    </tr>
+	  <tr>
+	    <td>{{story['storyID']}}</td>
+	    <td>{{story['title']}}</td>
+	    <td>{{story['author']}}</td>
+	    <td>
+	      <form method="POST" action = "/view">
+		{% if story['option'] %}
+		<input type="submit" value="View">
+		<input type="hidden" name="StoryID" value="thisStory">
+		{% endif %}
+		{% else %}
+		<input type="submit" value="Add">
+	      </form>
+	    </td>
+	  </tr>
+	  {% set thisStory = thisStory + 1 %}
 	  {% endfor %}
 	</table>
 </body>
