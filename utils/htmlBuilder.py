@@ -52,10 +52,10 @@ def buildTable(entries, user):
     return htmlString
 
 def contributeTable(entries,user):
-  #userID = getUserID(user)
+  userID = getUserID(user)
   ret = []
   for each in entries:
-    ret.append(hasContributed(user,each['storyID']))
+    ret.append(hasContributed(userID,each['storyID']))
   return ret
 
 

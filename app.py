@@ -70,7 +70,7 @@ def home():
     if 'user' in session:
         cursor = seeStories()
         entries = [dict(storyID=str(entry[0]), title=str(entry[1]), author=str(getName(str(entry[2]))), option=hasContributed(entry[2],entry[0]))   for entry in cursor.fetchall()]
-        print hasContributed (getUserID(session['user']), 3)
+        print hasContributed (getUserID(session['user']), 0)
         return render_template("home.html", code=Markup(buildTable(entries,session['user'])))
         
     else:    
