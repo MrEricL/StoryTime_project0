@@ -1,5 +1,6 @@
-from flask import Flask, render_template, request, session, url_for, flash, redirect
+from flask import Flask, render_template, request, session, url_for, flash, redirect, Markup
 from utils.accounts import authenticate
+from utils.htmlBuilder import buildTable
 from utils.db_builder import checkUsername, addUser, addStory, getUserID, seeStories, hasContributed, getName, getFullStory, getLastEdit, tableCreation
 import os
 
@@ -69,9 +70,9 @@ def home():
     if 'user' in session:
         cursor = seeStories()
         entries = [dict(storyID=str(entry[0]), title=str(entry[1]), author=str(getName(str(entry[2]))), option=hasContributed(entry[2],entry[0]))   for entry in cursor.fetchall()]
-        for entry in entries:
-            print entry['storyID']
-        return render_template("home.html",stories=entries)
+        print hasContributed (getUserID(session['user']), 3)
+        return render_template("home.html", code=Markup(buildTable(entries,session['user'])))
+        
     else:    
         return redirect(url_for("root"))
         
@@ -119,14 +120,10 @@ def logout():
     flash('You have been logged out successfully')
     return redirect(url_for('root'))
 
+
+
+
     
 if __name__ == '__main__':
     app.run(debug=True)
 
-''' JUNK PILE
-#create new account 
-@app.route('/register')
-def register():
-    #if there isn't an existing user w/ same username, add to users table 
-    #otherwise redirect to root with flashed message 
-'''

@@ -36,6 +36,16 @@
 	.active {
 	background-color: #FFD151;
 	}
+	    table, th, td {
+    background-color: white;
+    border: 1px solid black;
+    border-collapse: collapse;
+    border: 4px solid black;
+    vertical-align: center;
+    }
+    td {
+    height: 50px;
+    }
 
 </style>
 <head>
@@ -55,69 +65,7 @@
 	</ul>
 	<br><br>
 	<h1><center>Stories</center></h1>
-
-	<table style="width:100%">
-	  <style>
-	    table, th, td {
-	    background-color: white;
-	    border: 1px solid black;
-	    border-collapse: collapse;
-	    border: 4px solid black;
-	    vertical-align: center;
-	    }
-	    td {
-	    height: 50px;
-	    }
-	  </style>
-	  <tr>
-	    <th></th>
-	    <th>Title</th>
-	    <th>Author</th>
-	    <th>Status</th>
-	  </tr>
-	  {% set thisStory = 0 %}
-	  {% for story in stories %}
-	  <tr>
-	    <td>{{story['storyID']}}</td>
-	    <td>{{story['title']}}</td>
-	    <td>{{story['author']}}</td>
-	    <td>
-	      <form method="POST" action = "/view">
-		{% if story['option'] %}
-		<input type="submit" value="View">
-		<input type="hidden" name="StoryID" value="thisStory">
-		{% endif %}
-		{% else %}
-		<input type="submit" value="Add">
-	      </form>
-	    </td>
-	  </tr>
-	  {% set thisStory = thisStory + 1 %}
-	  {% endfor %}
-	</table>
+	{{code}}
 </body>
 </html>
 
-
-
-
-
-
-
-
-<!-- Form for Logout as a button
-
-	  <label class="logoutPos">
-	  <input name="logout" type="submit" value="Log Out">
-	  </label>
-
-
-	</form>
-		input[type=submit] {
-
-		padding:5px 25px; 
-		background: #33; 
-		color: white;
-		border:0 none;  
-	}
-	-->
