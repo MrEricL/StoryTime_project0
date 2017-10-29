@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, url_for, flash, redirect
 from utils.accounts import authenticate
-from utils.db_builder import checkUsername, addUser, addStory, getUserID, seeStories, hasContributed, getName, getFullStory, getLastEdit
+from utils.db_builder import checkUsername, addUser, addStory, getUserID, seeStories, hasContributed, getName, getFullStory, getLastEdit, tableCreation
 import os
 
 app = Flask(__name__)

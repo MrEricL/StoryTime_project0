@@ -30,8 +30,8 @@ def tableCreation():
 #==========================================================
 
 #COUNTERS
-userID_counter = 0;  #helps to assign userID
-storyID_counter = 0; #helps to assign storyID
+#userID_counter = 0;  #helps to assign userID
+#storyID_counter = 0; #helps to assign storyID
 
 #==========================================================
 
@@ -50,9 +50,14 @@ def addUser(new_username, new_password):
     f="data/usersandstories.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
-    global userID_counter
-    new_userID = userID_counter
-    userID_counter += 1
+    #global userID_counter
+    #new_userID = userID_counter
+    #userID_counter += 1
+    userCount = c.execute('SELECT COUNT(*) FROM users;')
+    new_userID = 0
+    for x in userCount:
+        new_userID = x[0]
+    #new_userID += 1
     hash_pass = hash_password(new_password)
     print ('The string to store in the db is: ' + hash_pass)
     c.execute('INSERT INTO users VALUES (?,?,?)',[new_username, hash_pass, new_userID])
@@ -65,9 +70,15 @@ def addStory(new_title, st_author, st_content):
     f="data/usersandstories.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
-    global storyID_counter
-    storyID_counter += 1
-    new_storyID = storyID_counter
+    #global storyID_counter
+    #storyID_counter += 1
+    #new_storyID = storyID_counter
+    storyCount = c.execute('SELECT COUNT(*) FROM stories;')
+    new_storyID = 0
+    for x in storyCount:
+        new_storyID = x[0]
+        #print new_storyID
+    #new_storyID += 1
     c.execute('INSERT INTO stories VALUES (?,?,?,?)',[new_storyID, new_title, st_author, st_content])
     c.execute('INSERT INTO updates VALUES (?,?,?)',[new_storyID, st_content, st_author])
     db.commit()
@@ -202,10 +213,11 @@ def hasContributed(thisUser,thisStory):
         #print row[0]
     db.close()
 
+
 if __name__ == '__main__':     
     #TESTING
     tableCreation()
-    
+
     #add users
     addUser('manahal', 'mt123')
     addUser('joe', 'fgh349')
@@ -217,10 +229,10 @@ if __name__ == '__main__':
     addStory('bye', 3, 'we enjoyed the time')
     
     #update story
-    addUpdate(1, 'how are you doing', 1)
-    addUpdate(2, 'we will see you later', 3)
-    addUpdate(1, 'doing fine', 2)
-    addUpdate(2, 'kk will do', 0)
+    addUpdate(0, 'how are you doing', 1)
+    addUpdate(1, 'we will see you later', 3)
+    addUpdate(0, 'doing fine', 2)
+    addUpdate(1, 'kk will do', 0)
     
     #get the last edit
     getLastEdit(0)
@@ -239,3 +251,5 @@ if __name__ == '__main__':
     print "Has user 6 edited story 0 (should be False): " + str( hasContributed(6,0) )
     print "Has user 3 edited story 0 (should be False): " + str( hasContributed(3,0) )
     print "Has user 2 edited story 0 (should be True): " + str( hasContributed(2,0) )
+
+
