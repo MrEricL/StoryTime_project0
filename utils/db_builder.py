@@ -10,7 +10,7 @@ Tables: users, stories, updates
 '''
 
 def tableCreation():
-    f="usersandstories.db"
+    f="data/usersandstories.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
     #Create the users table
@@ -37,7 +37,7 @@ storyID_counter = 0; #helps to assign storyID
 
 #add a user
 def addUser(new_username, new_password):
-    f="usersandstories.db"
+    f="data/usersandstories.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
     global userID_counter
@@ -50,7 +50,7 @@ def addUser(new_username, new_password):
 
 #add a new story
 def addStory(new_title, st_author, st_content):
-    f="usersandstories.db"
+    f="data/usersandstories.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
     global storyID_counter
@@ -64,12 +64,12 @@ def addStory(new_title, st_author, st_content):
 
 #make an update to a story
 def addUpdate(new_storyID, new_content, new_contributor):
-    f="usersandstories.db"
+    f="data/usersandstories.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
     c.execute('INSERT INTO updates VALUES (?,?,?)',[new_storyID, new_content, new_contributor])
-    c.execute('SELECT content FROM stories WHERE storyID= ' + str(new_storyID) + ';')
-    old_content = c.fetchone()
+    stuff = c.execute('SELECT content FROM stories WHERE storyID= ' + str(new_storyID) + ';')
+    old_content = stuff.fetchone()
     #print 'OLD CONTENT...'
     #print old_content
     final_content = old_content[0] +' ' + new_content
@@ -80,7 +80,7 @@ def addUpdate(new_storyID, new_content, new_contributor):
     db.close()
 
 def getLastEdit(st_ID):
-    f="usersandstories.db"
+    f="data/usersandstories.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
     all_edits = c.execute('SELECT contribution FROM updates WHERE storyID= ' + str(st_ID) + ';')
@@ -91,7 +91,7 @@ def getLastEdit(st_ID):
     return retVal
 
 def getFullStory(st_ID):
-    f="usersandstories.db"
+    f="data/usersandstories.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
     story = c.execute('SELECT content FROM stories WHERE storyID= ' + str(st_ID) + ';')
@@ -102,7 +102,7 @@ def getFullStory(st_ID):
     return retVal
 
 def getTitle(st_ID):
-    f="usersandstories.db"
+    f="data/usersandstories.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
     retTitle = c.execute('SELECT title FROM stories WHERE storyID= ' + str(st_ID) + ';')
@@ -113,7 +113,7 @@ def getTitle(st_ID):
     return retVal
 
 def checkUsername(userN):
-    f="usersandstories.db"
+    f="data/usersandstories.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     users = c.execute('SELECT username FROM users;')
@@ -127,7 +127,7 @@ def checkUsername(userN):
 #==========================================================
 #ACCESSORS
 def getPass(username):
-    f="usersandstories.db"
+    f="data/usersandstories.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
     command = "SELECT username, password FROM users"
@@ -141,7 +141,7 @@ def getPass(username):
     return retVal
 
 def getUserID(username):
-    f="usersandstories.db"
+    f="data/usersandstories.db"
     db = sqlite3.connect(f) #open if f exists, otherwise create
     c = db.cursor()         #facilitates db ops
     command = "SELECT username, userID FROM users"
@@ -157,7 +157,7 @@ def getUserID(username):
 #==========================================================
 #HELPERS
 def hasContributed(thisUser,thisStory):
-    f="usersandstories.db"
+    f="data/usersandstories.db"
     db = sqlite3.connect(f)
     c = db.cursor()
     con = c.execute('SELECT contributor FROM updates WHERE storyID = ' + str(thisStory) + ';')
@@ -184,10 +184,10 @@ if __name__ == '__main__':
     addStory('bye', 3, 'we enjoyed the time')
     
     #update story
-    addUpdate(0, 'how are you doing', 1)
-    addUpdate(1, 'we will see you later', 3)
-    addUpdate(0, 'doing fine', 2)
-    addUpdate(1, 'kk will do', 0)
+    addUpdate(1, 'how are you doing', 1)
+    addUpdate(2, 'we will see you later', 3)
+    addUpdate(1, 'doing fine', 2)
+    addUpdate(2, 'kk will do', 0)
     
     #get the last edit
     getLastEdit(0)
