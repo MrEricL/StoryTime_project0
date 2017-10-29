@@ -1,5 +1,7 @@
 import sqlite3   #enable control of an sqlite database
 import csv       #facilitates CSV I/O
+import hashlib
+import uuid
 
 
 #==========================================================
@@ -35,6 +37,14 @@ storyID_counter = 0; #helps to assign storyID
 
 #ADD VALUES TO TABLES
 
+def hash_password(password):
+    key = uuid.uuid4().hex
+    return hashlib.sha256(key.encode() + password.encode()).hexdigest()+':' + key
+
+def check_password(hashed_password, user_password):
+    password, key = hashed_password.split(':')
+    return password == hashlib.sha256(key.encode()+user_password.encode()).hexdigest()
+
 #add a user
 def addUser(new_username, new_password):
     f="data/usersandstories.db"
@@ -43,7 +53,9 @@ def addUser(new_username, new_password):
     global userID_counter
     new_userID = userID_counter
     userID_counter += 1
-    c.execute('INSERT INTO users VALUES (?,?,?)',[new_username, new_password, new_userID])
+    hash_pass = hash_password(new_password)
+    print ('The string to store in the db is: ' + hash_pass)
+    c.execute('INSERT INTO users VALUES (?,?,?)',[new_username, hash_pass, new_userID])
     db.commit()
     db.close()
 
