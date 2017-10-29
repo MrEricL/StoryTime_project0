@@ -166,6 +166,27 @@ def getUserID(username):
     db.close()
     return retVal
 
+def getName(ID):
+    f="data/usersandstories.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()         #facilitates db ops
+    command = "SELECT username, userID FROM users"
+    info = c.execute(command)
+    retVal = None
+    for user in info:
+        if str(user[1]) == ID:
+            retVal = str(user[0])
+    db.close()
+    return retVal
+
+def seeStories():
+    f="data/usersandstories.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()         #facilitates db ops
+
+    command = 'SELECT storyID, title, author FROM stories;'
+    return c.execute(command)
+
 #==========================================================
 #HELPERS
 def hasContributed(thisUser,thisStory):

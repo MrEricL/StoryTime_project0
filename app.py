@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, session, url_for, flash, redirect
 from utils.accounts import authenticate
-from utils.db_builder import checkUsername, addUser, addStory, getUserID
+from utils.db_builder import checkUsername, addUser, addStory, getUserID, seeStories, hasContributed, getName, getFullStory, getLastEdit
 import os
 
 app = Flask(__name__)
@@ -64,22 +64,31 @@ def register():
     
     
 #user dashboard 
-@app.route('/home')
+@app.route('/home', methods = ['POST','GET'])
 def home():
-    #render template for dashboard
-    #if logged:
-    if 'user' in session: 
-        return render_template("home.html")
+    if 'user' in session:
+        cursor = seeStories()
+        entries = [dict(storyID=str(entry[0]), title=str(entry[1]), author=str(getName(str(entry[2]))), option=hasContributed(entry[2],entry[0]))   for entry in cursor.fetchall()]
+        for entry in entries:
+            print entry['storyID']
+        return render_template("home.html",stories=entries)
     else:    
         return redirect(url_for("root"))
         
 
 #allows user to view stories/add to stories (unless we want to separate the two)
-@app.route('/view')
+@app.route('/view', methods = ['POST', 'GET'])
 def view():
     #render template
     if 'user' in session:
-        return render_template("addview.html")
+        #thisStory = request.args['thisStory']
+        #hasCont = hasContributed(session['user'],thisStory)
+        #if hasCont:
+            #content = getFullStory(thisStory)
+        #else:
+            #content = getLastEdit(thisStory)
+        #return render_template("addview.html", content=content, hasCont=hasCont)
+        return "in progress..."
     else:    
         return redirect(url_for("root"))
 

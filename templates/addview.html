@@ -1,7 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title> Add / View </title> <!-- use a conditional to change it-->
+  <title>
+    {% if hasCont %}
+      View the Full Story...
+    {% endif %}
+  </title>
 </head>
 <style type="text/css">
 	body {
@@ -42,8 +46,6 @@
 
 </style>
 <body>
-
-	<!-- Put the conditional to print the story -->
 	<ul>
   <li><a href="home">Home</a></li>
   <li><a class="active" > Add/View </a></li>
@@ -52,12 +54,13 @@
 	</ul>
 	<br><br>
 	<h2>Stories</h2>
-	<form>
-		
-		<textarea rows="4" cols="50" name="storyUp"></textarea>
-		<br>
-		<input type="submit" value="Submit">
+	{{content}}
+	{% if not(hasCont) %}
+	<form>	
+	  <textarea rows="4" cols="50" name="storyUp"></textarea>
+	  <br>
+	  <input type="submit" value="Submit">
 	</form>
-
+	{% endif %}
 </body>
 </html>
