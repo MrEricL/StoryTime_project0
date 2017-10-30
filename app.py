@@ -98,11 +98,15 @@ def view():
     if 'user' in session:
         thisStory = request.args['StoryID']
         status = request.args['status']
-        if status == 1:
+        print 'Current story stat:'
+        print status
+        if status == str(1):
+            print 'Getting full story:'
             content = getFullStory(thisStory)
         else:
+            print 'Getting last edit:'
             content = getLastEdit(thisStory)
-        return render_template("addview.html", content=content, status=status)
+        return render_template("addview.html", newcontent=content, newstatus=status)
         #return "in progress..."
     else:    
         return redirect(url_for("root"))

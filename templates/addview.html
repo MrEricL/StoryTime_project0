@@ -40,10 +40,10 @@
 </style>
 <head>
   <title>
-    {% if status == 1 %}
+    {% if newstatus == 1 %}
       <title>View the Full Story...</title>
     {% endif %}
-    {% if status == 0 %}
+    {% if newstatus == 0 %}
       <title>Write the next part of the story...</title>
     {% endif %}
   </title>
@@ -57,7 +57,7 @@
 	</ul>
 	<br><br>
 	<h2>Stories</h2>
-	{{content}}
+	{{newcontent}}
 	{% if status == 0 %}
 	<form action="/contribute">	
 	  <textarea rows="4" cols="50" name="storyUp"></textarea>
