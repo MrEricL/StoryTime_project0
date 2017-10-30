@@ -41,10 +41,10 @@
 <head>
   <title>
     {% if not canEdit %}
-      View the Full Story...
+      <title>View the Full Story...</title>
     {% endif %}
     {% if canEdit %}
-      Write the next part of the story...
+      <title>Write the next part of the story...</title>
     {% endif %}
   </title>
 </head>
@@ -60,10 +60,10 @@
   <li style="float:right"><a href = "/logout">Log Out</a></li>
 	</ul>
 	<br><br>
-	<h2>{{title}}</h2>
+	<h2>Stories</h2>
 	{{newcontent}}
 	{% if canEdit %}
-	<form method='POST' action="/contribute">	
+	<form method='GET' action="/contribute">	
 	  <textarea rows="4" cols="50" name="storyUp"></textarea>
 	  <br>
 	  <input type="submit" value="update">
