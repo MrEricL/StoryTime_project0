@@ -40,10 +40,10 @@
 </style>
 <head>
   <title>
-    {% if newstatus == 1 %}
+    {% if not canEdit %}
       <title>View the Full Story...</title>
     {% endif %}
-    {% if newstatus == 0 %}
+    {% if canEdit %}
       <title>Write the next part of the story...</title>
     {% endif %}
   </title>
@@ -58,8 +58,8 @@
 	<br><br>
 	<h2>Stories</h2>
 	{{newcontent}}
-	{% if status == 0 %}
-	<form action="/contribute">	
+	{% if canEdit %}
+	<form method='POST' action="/contribute" StoryID={{thisStory}}>	
 	  <textarea rows="4" cols="50" name="storyUp"></textarea>
 	  <br>
 	  <input type="submit" value="update">

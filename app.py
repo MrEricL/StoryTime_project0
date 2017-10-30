@@ -84,10 +84,12 @@ def home():
 def contribute():
     if 'user' in session:
         #thisStory = request.args['StoryID']
-        #nextChapter = request.form['storyUp']
+        nextChapter = request.form['storyUp']
+        print nextChapter
         #addUpdate(thisStory, nextChapter, session['user'])
         #flash('Your contribution was successful! You may now view the whole story!!!')
-        return redirect(url_for("view"))
+        #return redirect(url_for("view"))
+        return "in progress..."
     else:
           return redirect(url_for("root"))
       
@@ -101,12 +103,14 @@ def view():
         print 'Current story stat:'
         print status
         if status == str(1):
-            print 'Getting full story:'
+            #print 'Getting full story:'
             content = getFullStory(thisStory)
+            canEdit = False
         else:
-            print 'Getting last edit:'
+            #print 'Getting last edit:'
             content = getLastEdit(thisStory)
-        return render_template("addview.html", newcontent=content, newstatus=status)
+            canEdit = True
+        return render_template("addview.html", newcontent=content, canEdit=canEdit,thisStory=thisStory)
         #return "in progress..."
     else:    
         return redirect(url_for("root"))
