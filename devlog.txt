@@ -72,6 +72,6 @@ MT- fixed logout, worked on creating database in other directory and
 AN- fixed the hasContributed method
 AM- added the add/view functionality
 EL- fixed the table display for the homepage
-MT- fixed the databases and getting userID
+MT- fixed the database methods and getting userID
 ==============================================================
 

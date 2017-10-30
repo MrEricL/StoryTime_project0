@@ -96,21 +96,23 @@ def contribute():
           return redirect(url_for("root"))
       
 #allows user to view stories/add to stories (unless we want to separate the two)
-@app.route('/view', methods = ['GET'])
+@app.route('/view', methods = ['POST', 'GET'])
 def view():
     #render template
     if 'user' in session:
-        thisStory = request.args['StoryID']
-        status = request.args['status']
+        thisStory = request.form['StoryID']
+        print "This StoryID is:"
+        print thisStory
+        status = request.form['status']
         print 'Current story stat:'
         print status
         title = getTitle(thisStory)
         if status == str(1):
-            #print 'Getting full story:'
+            print 'Getting full story:'
             content = getFullStory(thisStory)
             canEdit = False
         else:
-            #print 'Getting last edit:'
+            print 'Getting last edit:'
             content = getLastEdit(thisStory)
             canEdit = True
         return render_template("addview.html", newcontent=content, canEdit=canEdit, thisStory=thisStory, title=title)
