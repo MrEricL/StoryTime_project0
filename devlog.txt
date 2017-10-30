@@ -38,7 +38,6 @@ LESSONS LEARNED
 2017-10-21
 --------------------------------------------------------------
 AN- skeleton for app.py
-AM-
 EL- Worked on the login/register and dashboard HTML + colors!
 MT- Worked on database creation, creating tables in db_builder.py
 ==============================================================
@@ -47,7 +46,7 @@ MT- Worked on database creation, creating tables in db_builder.py
 2017-10-23
 --------------------------------------------------------------
 AN-
-AM- 
+AM- skeleton for storyoptions
 EL- Finished login/register and dashboard HTML + navigation bar
 MT- Worked on test cases for the database, adding entries; creating
     methods to accomplish this
@@ -56,7 +55,7 @@ MT- Worked on test cases for the database, adding entries; creating
 2017-10-24
 --------------------------------------------------------------
 AN- worked on authenticating in accounts.py, getInfo in db_builder.py
-AM- 
+AM- hasContributed, getName into db_builder.py
 EL- Finished new and view/add HTML
 MT- Added accessor methods to gather data from tables and update data
 ==============================================================
@@ -64,22 +63,23 @@ MT- Added accessor methods to gather data from tables and update data
 2017-10-25
 --------------------------------------------------------------
 AN- worked on using authentication in login flask route
-AM- 
+AM- started work on adding a new story
 EL- Working on misc bugs
 MT- Fixed bugs in working with database
 ==============================================================
 
 2017-10-26
 --------------------------------------------------------------
-AN + EL - Integrating the add/view python with the flask
-AM + MT - Fixing issues with the DB and working on the login/register/logout
+AM + EL - Integrating the add/view python with the flask
+AN + MT - Fixing issues with the DB and working on the login/register/logout
 ==============================================================
 
 2017-10-27
 --------------------------------------------------------------
 AN- finished adding creating a new story, redirected user to login page if they
     go to /newstory url without being logged in 
-AM-
+AM- displayed dashboard, started working on adding a new story, finished viewing and/or        
+    adding to a story, seeStories into db_builder.py
 EL-
 MT- fixed logout, worked on creating database in other directory and 
     bringing methods in accordance to it
