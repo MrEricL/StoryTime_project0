@@ -69,7 +69,7 @@ def register():
 def home():
     if 'user' in session:
         cursor = seeStories()
-        entries = [dict(storyID=str(entry[0]), title=str(entry[1]), author=str(getName(str(entry[2]))), option=hasContributed(entry[2],entry[0]))   for entry in cursor.fetchall()]
+        entries = [dict(storyID=str(entry[0]), title=str(entry[1]), author=str(getName(str(entry[2]))), option=hasContributed(getUserID(session['user']),entry[0])) for entry in cursor.fetchall()]
         #print "Current userID:"
         #print getUserID(session['user'])
         #print "Has user 0 contributed to story 0:"
@@ -89,8 +89,9 @@ def contribute():
         print nextChapter
         addUpdate(thisStory, nextChapter, session['user'])
         flash('Your contribution was successful! You may now view the whole story!!!')
+        print hasContributed(getUserID(session['user']),thisStory)
         return redirect(url_for("view",StoryID=thisStory,status=1))
-        return "in progress..."
+        #return "in progress..."
     else:
           return redirect(url_for("root"))
       
