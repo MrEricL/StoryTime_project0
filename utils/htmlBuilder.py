@@ -21,12 +21,14 @@ tableHead='''
 
 tableView='''
 <input type="submit" value="View">
+<input type="hidden" name="status" value= 1> 
 </form>
 </td>
 </tr>
 '''
 
 tableAdd='''
+<input type="hidden" name="status" value= 0> 
 <input type="submit" value="Add">
 </form>
 </td>
@@ -43,7 +45,7 @@ def buildTable(entries, user):
     counter=0
     for each in entries:
         htmlString = htmlString + tableHead % (each['storyID'], each['title'], each['author'], each['storyID'])
-        if listCont[counter] == None:
+        if listCont[counter] == False:
           htmlString = htmlString + tableAdd
         else:
           htmlString = htmlString + tableView
