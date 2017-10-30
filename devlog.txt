@@ -7,24 +7,6 @@ pd 8
 ---------------------
 StoryTime: Yes The Project and Team Name are the Same
 
-/////////// Zone of Reflection \\\\\\\\\\\
-------------------------------------------
-OBSTACLES OVERCOME
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-UNRESOLVED ISSUES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-MID-DEVELOPMENT DESIGN CHANGES
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-LESSONS LEARNED
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-||||||||||||||||||||||||||||||||||||||||||
 
  ______   ______   __   __   __       ______   _______     
 /_____/\ /_____/\ /_/\ /_/\ /_/\     /_____/\ /______/\    
@@ -80,8 +62,16 @@ AN- finished adding creating a new story, redirected user to login page if they
     go to /newstory url without being logged in 
 AM- displayed dashboard, started working on adding a new story, finished viewing and/or        
     adding to a story, seeStories into db_builder.py
-EL-
+EL- misc bugs and fixes, changing the html actions to flask routes
 MT- fixed logout, worked on creating database in other directory and 
     bringing methods in accordance to it
+==============================================================
+
+2017-10-29
+--------------------------------------------------------------
+AN- fixed the hasContributed method
+AM- added the add/view functionality
+EL- fixed the table display for the homepage
+MT- fixed the databases and getting userID
 ==============================================================
 

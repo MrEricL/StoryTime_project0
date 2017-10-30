@@ -15,7 +15,7 @@ tableHead='''
         <td>%s</td>
         <td>%s</td>
         <td>
-          <form method="GET" action = "/view">
+          <form method="POST" action = "/view">
           <input type="hidden" name="StoryID" value= %s> 
           '''
 
