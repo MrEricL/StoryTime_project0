@@ -49,6 +49,10 @@
   </title>
 </head>
 <body>
+  {% set messages = get_flashed_messages() %}
+  {% for message in messages %}
+  <center> {{message}} </center>
+  {% endfor %}
 	<ul>
   <li><a href="home">Home</a></li>
   <li><a class="active" > Add/View </a></li>
@@ -59,10 +63,11 @@
 	<h2>Stories</h2>
 	{{newcontent}}
 	{% if canEdit %}
-	<form method='POST' action="/contribute" StoryID={{thisStory}}>	
+	<form method='GET' action="/contribute">	
 	  <textarea rows="4" cols="50" name="storyUp"></textarea>
 	  <br>
 	  <input type="submit" value="update">
+	  <input type="hidden" name="StoryID" value={{thisStory}}>
 	</form>
 	{% endif %}
 </body>

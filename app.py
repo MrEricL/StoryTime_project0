@@ -83,18 +83,19 @@ def home():
 @app.route('/contribute', methods = ['POST','GET'])
 def contribute():
     if 'user' in session:
-        #thisStory = request.args['StoryID']
-        nextChapter = request.form['storyUp']
+        thisStory = request.args['StoryID']
+        print thisStory
+        nextChapter = request.args['storyUp']
         print nextChapter
-        #addUpdate(thisStory, nextChapter, session['user'])
-        #flash('Your contribution was successful! You may now view the whole story!!!')
-        #return redirect(url_for("view"))
+        addUpdate(thisStory, nextChapter, session['user'])
+        flash('Your contribution was successful! You may now view the whole story!!!')
+        return redirect(url_for("view",StoryID=thisStory,status=1))
         return "in progress..."
     else:
           return redirect(url_for("root"))
       
 #allows user to view stories/add to stories (unless we want to separate the two)
-@app.route('/view', methods = ['POST', 'GET'])
+@app.route('/view', methods = ['GET'])
 def view():
     #render template
     if 'user' in session:
