@@ -206,13 +206,15 @@ def hasContributed(thisUser,thisStory):
     con = c.execute('SELECT contributor FROM updates WHERE storyID = ' + str(thisStory) + ';')
     
     for row in con:
+        #print "This contributor edited the story:"
         #print row
-        if row[0]==thisUser:
+        if str(row[0])==str(thisUser):
             db.close()
+            #print True
             return True
         #print row[0]
-    return False
     db.close()
+    return False
 
 
 if __name__ == '__main__':     
@@ -256,9 +258,9 @@ if __name__ == '__main__':
     print getName(3)
     
     #check if somebody's edited the story
-    print "Has user 1 edited story 0 (should be True): " + str( hasContributed(1,0) )
+    print "Has user 0 edited story 0 (should be True): " + str( hasContributed(0,0) )
     print "Has user 6 edited story 0 (should be False): " + str( hasContributed(6,0) )
-    print "Has user 3 edited story 0 (should be False): " + str( hasContributed(3,0) )
+    print "Has user 3 edited story 1 (should be True): " + str( hasContributed(3,1) )
     print "Has user 2 edited story 0 (should be True): " + str( hasContributed(2,0) )
 
 
