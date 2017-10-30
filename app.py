@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session, url_for, flash, redirect, Markup
 from utils.accounts import authenticate
 from utils.htmlBuilder import buildTable
-from utils.db_builder import checkUsername, addUser, addStory, getUserID, seeStories, hasContributed, getName, getFullStory, getLastEdit, tableCreation, addUpdate
+from utils.db_builder import checkUsername, addUser, addStory, getUserID, seeStories, hasContributed, getName, getFullStory, getLastEdit, tableCreation, addUpdate, getTitle
 import os
 
 app = Flask(__name__)
@@ -104,6 +104,7 @@ def view():
         status = request.args['status']
         print 'Current story stat:'
         print status
+        title = getTitle(thisStory)
         if status == str(1):
             #print 'Getting full story:'
             content = getFullStory(thisStory)
@@ -112,7 +113,7 @@ def view():
             #print 'Getting last edit:'
             content = getLastEdit(thisStory)
             canEdit = True
-        return render_template("addview.html", newcontent=content, canEdit=canEdit,thisStory=thisStory)
+        return render_template("addview.html", newcontent=content, canEdit=canEdit, thisStory=thisStory, title=title)
         #return "in progress..."
     else:    
         return redirect(url_for("root"))

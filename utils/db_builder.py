@@ -197,6 +197,19 @@ def seeStories():
     command = 'SELECT storyID, title, author FROM stories;'
     return c.execute(command)
 
+def getTitle(id):
+    f="data/usersandstories.db"
+    db = sqlite3.connect(f) #open if f exists, otherwise create
+    c = db.cursor()         #facilitates db ops
+
+    command = 'SELECT title FROM stories WHERE storyID == ' + str(id)
+    info = c.execute(command)
+    retVal = ""
+    for title in info:
+        retVal = str(title[0])
+    db.close()
+    return retVal
+
 #==========================================================
 #HELPERS
 def hasContributed(thisUser,thisStory):
