@@ -1,0 +1,9 @@
+Changes
+
+- We broke down the functions more files to ease clutter
+	- accounts.py
+	- htmlBuilder.py
+- Data directory was added for to put the database for itself
+- Database tables were changed so that all three tables were linked by either
+	- UserID
+	- StoryID
