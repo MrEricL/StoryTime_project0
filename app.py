@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request, session, url_for, flash, redirect, Markup
 from utils.accounts import authenticate
 from utils.htmlBuilder import buildTable
-from utils.db_builder import checkUsername, addUser, addStory, getUserID, seeStories, hasContributed, getName, getFullStory, getLastEdit, tableCreation
+from utils.db_builder import checkUsername, addUser, addStory, getUserID, seeStories, hasContributed, getName, getFullStory, getLastEdit, tableCreation, addUpdate
 import os
 
 app = Flask(__name__)
@@ -72,7 +72,7 @@ def home():
         entries = [dict(storyID=str(entry[0]), title=str(entry[1]), author=str(getName(str(entry[2]))), option=hasContributed(entry[2],entry[0]))   for entry in cursor.fetchall()]
         #print "Current userID:"
         #print getUserID(session['user'])
-       # print "Has user 0 contributed to story 0:"
+        #print "Has user 0 contributed to story 0:"
         #print hasContributed(getUserID(session['user']), 2)
         return render_template("home.html", code=Markup(buildTable(entries,session['user'])))
         
@@ -80,19 +80,30 @@ def home():
         return redirect(url_for("root"))
         
 
+@app.route('/contribute', methods = ['POST','GET'])
+def contribute():
+    if 'user' in session:
+        #thisStory = request.args['StoryID']
+        #nextChapter = request.form['storyUp']
+        #addUpdate(thisStory, nextChapter, session['user'])
+        #flash('Your contribution was successful! You may now view the whole story!!!')
+        return redirect(url_for("view"))
+    else:
+          return redirect(url_for("root"))
+      
 #allows user to view stories/add to stories (unless we want to separate the two)
 @app.route('/view', methods = ['POST', 'GET'])
 def view():
     #render template
     if 'user' in session:
-        thisStory = request.form['thisStory']
-        #hasCont = hasContributed(session['user'],thisStory)
-        #if hasCont:
-            #content = getFullStory(thisStory)
-        #else:
-            #content = getLastEdit(thisStory)
-        #return render_template("addview.html", content=content, hasCont=hasCont)
-        return "in progress..."
+        thisStory = request.args['StoryID']
+        status = request.args['status']
+        if status == 1:
+            content = getFullStory(thisStory)
+        else:
+            content = getLastEdit(thisStory)
+        return render_template("addview.html", content=content, status=status)
+        #return "in progress..."
     else:    
         return redirect(url_for("root"))
 

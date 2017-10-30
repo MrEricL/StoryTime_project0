@@ -1,12 +1,5 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>
-    {% if hasCont %}
-      View the Full Story...
-    {% endif %}
-  </title>
-</head>
 <style type="text/css">
 	body {
 		background-color: #B5E2FA;
@@ -45,6 +38,16 @@
 	}
 
 </style>
+<head>
+  <title>
+    {% if status == 1 %}
+      <title>View the Full Story...</title>
+    {% endif %}
+    {% if status == 0 %}
+      <title>Write the next part of the story...</title>
+    {% endif %}
+  </title>
+</head>
 <body>
 	<ul>
   <li><a href="home">Home</a></li>
@@ -55,11 +58,11 @@
 	<br><br>
 	<h2>Stories</h2>
 	{{content}}
-	{% if not(hasCont) %}
-	<form>	
+	{% if status == 0 %}
+	<form action="/contribute">	
 	  <textarea rows="4" cols="50" name="storyUp"></textarea>
 	  <br>
-	  <input type="submit" value="Submit">
+	  <input type="submit" value="update">
 	</form>
 	{% endif %}
 </body>
